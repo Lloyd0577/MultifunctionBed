@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/app/BaseActivity.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/app/Constant.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/app/MyApplication.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/entity/EntityDevice.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/service/BLEService.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/ui/adapter/DeviceAdapter.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/utils/BluetoothController.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/java/com/example/lloyd/multifunctionbed/utils/ConvertUtils.java" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/activity_device_list.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/item_device.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/layout/layout_common_title.xml" charset="GBK" />
+    <file url="file://$PROJECT_DIR$/app/src/main/res/mipmap-hdpi/go.png" charset="GBK" />
+  </component>
+</project>
