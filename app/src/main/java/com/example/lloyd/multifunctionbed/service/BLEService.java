@@ -79,11 +79,22 @@ public class BLEService extends Service {
                     sendBroadcast(mesDevice);
                     break;
                 case Constant.WM_NEED_SCAN:
-                    Log.d("####","handler receive");
+                    Log.d("####", "handler receive");
                     Intent intent1 = new Intent(
                             Constant.ACTION_NEED_SCAN);
                     sendBroadcast(intent1);
                     break;
+                case Constant.WM_SET_NOTIFY_SUCCESS:
+                    Log.d("####", "handler receive");
+                    Intent intent2 = new Intent(
+                            Constant.ACTION_SET_NOTIFY_SUCCESS);
+                    sendBroadcast(intent2);
+                    break;
+                case Constant.WM_SET_NOTIFY_FAILED:
+                    Log.d("####", "handler receive");
+                    Intent intent3 = new Intent(
+                            Constant.ACTION_SET_NOTIFY_FAILED);
+                    sendBroadcast(intent3);
                 default:
                     break;
 

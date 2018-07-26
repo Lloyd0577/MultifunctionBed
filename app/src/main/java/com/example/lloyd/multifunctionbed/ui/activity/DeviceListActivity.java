@@ -32,6 +32,7 @@ import com.example.lloyd.multifunctionbed.entity.EntityDevice;
 import com.example.lloyd.multifunctionbed.service.BLEService;
 import com.example.lloyd.multifunctionbed.ui.adapter.DeviceAdapter;
 import com.example.lloyd.multifunctionbed.utils.BluetoothController;
+import com.example.lloyd.multifunctionbed.utils.LoadingDialogManager;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -67,7 +68,8 @@ public class DeviceListActivity extends BaseActivity {
         setContentView(R.layout.activity_device_list);
         Log.d("####", "activity onCreate");
         initView();
-
+        registerReceiver();
+        initService();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {//如果 API level 是大于等于 23(Android 6.0) 时
             //判断是否具有权限
             if (ContextCompat.checkSelfPermission(this,
@@ -108,6 +110,8 @@ public class DeviceListActivity extends BaseActivity {
         intentFilter.addAction(Constant.ACTION_STOP_CONNECT);
         intentFilter.addAction(Constant.ACTION_STOP_SCAN);
         intentFilter.addAction(Constant.ACTION_NEED_SCAN);
+        intentFilter.addAction(Constant.ACTION_SET_NOTIFY_SUCCESS);
+        intentFilter.addAction(Constant.ACTION_SET_NOTIFY_FAILED);
         registerReceiver(receiver, intentFilter);
     }
 
@@ -161,18 +165,23 @@ public class DeviceListActivity extends BaseActivity {
                     adapter.notifyDataSetChanged();
                 }
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_CONNECTED_ONE_DEVICE)) {
-                Intent intent1 = new Intent(DeviceListActivity.this,MainControlActivity.class);
-                intent1.putExtra("connectDevice",currentConnectDevice);
-                startActivity(intent1);
-            } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_STOP_CONNECT)) {
 
+            } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_STOP_CONNECT)) {
+                Toast.makeText(DeviceListActivity.this, "连接已断开", Toast.LENGTH_SHORT).show();
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_RECEIVE_MESSAGE_FROM_DEVICE)) {
 
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_STOP_SCAN)) {
                 stopAnimation();
-            }else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_NEED_SCAN)){
-                Log.d("####","broad receive");
+            } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_NEED_SCAN)) {
+                Log.d("####", "broad receive");
                 initBlueTooth();
+            } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_SET_NOTIFY_SUCCESS)) {
+                LoadingDialogManager.getInstance().dismiss();
+                Intent intent1 = new Intent(DeviceListActivity.this, MainControlActivity.class);
+                intent1.putExtra("connectDevice", currentConnectDevice);
+                startActivity(intent1);
+            }else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_SET_NOTIFY_FAILED)){
+
             }
         }
     }
@@ -182,8 +191,7 @@ public class DeviceListActivity extends BaseActivity {
     protected void onResume() {
         Log.d("####", "activity onResume");
         super.onResume();
-        registerReceiver();
-        initService();
+
     }
 
     /**
@@ -254,6 +262,7 @@ public class DeviceListActivity extends BaseActivity {
             public void onItemClick(AdapterView<?> arg0, View arg1, int index,
                                     long arg3) {
                 currentConnectDevice = list.get(index);
+                LoadingDialogManager.getInstance().show(DeviceListActivity.this, "正在连接设备...");
                 BluetoothController.getInstance(DeviceListActivity.this).connect(currentConnectDevice);
             }
         });
@@ -345,13 +354,14 @@ public class DeviceListActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         stopService(intentService);
+        unregisterReceiver(receiver);
         super.onDestroy();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        unregisterReceiver(receiver);
+
     }
 
     @Override

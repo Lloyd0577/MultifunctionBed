@@ -395,13 +395,23 @@ public class BluetoothController {
                 break;
             }
         }
+        Message msg = new Message();
+        boolean isSetNotifySuccess;
         boolean result = bleGatt.setCharacteristicNotification(bleGattCharacteristic, true);
         BluetoothGattDescriptor descriptor = bleGattCharacteristic.getDescriptor(UUID.fromString("00002902-0000-1000-8000-00805f9b34fb"));
         if (result && descriptor == null) {
-            return;
+            isSetNotifySuccess = true;
         } else {
             descriptor.setValue(BluetoothGattDescriptor.ENABLE_NOTIFICATION_VALUE);
-            this.bleGatt.writeDescriptor(descriptor);
+            isSetNotifySuccess = this.bleGatt.writeDescriptor(descriptor);
+        }
+        if (isSetNotifySuccess) {
+            msg.what = Constant.WM_SET_NOTIFY_SUCCESS;
+        } else {
+            msg.what = Constant.WM_SET_NOTIFY_FAILED;
+        }
+        if (serviceHandler != null) {
+            BluetoothController.this.serviceHandler.sendMessage(msg);
         }
     }
 }

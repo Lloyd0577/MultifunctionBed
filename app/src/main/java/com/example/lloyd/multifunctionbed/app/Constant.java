@@ -13,6 +13,10 @@ public class Constant {
     public final static int WM_STOP_CONNECT = 5;
 //    应用启动第一次扫描
     public final static int WM_NEED_SCAN = 6;
+    /*设置通知成功*/
+    public final static int WM_SET_NOTIFY_FAILED = 8;
+    /*设置通知失败*/
+    public final static int WM_SET_NOTIFY_SUCCESS = 7;
 
     //intent的action们
     public final static String ACTION_UPDATE_DEVICE_LIST = "action.update.device.list";//更新设备列表
@@ -21,6 +25,8 @@ public class Constant {
     public final static String ACTION_NEED_SCAN = "action.receive.need.scan";
     public final static String ACTION_STOP_CONNECT = "action.stop.connect";
     public final static String ACTION_STOP_SCAN = "action.stop.scan";
+    public final static String ACTION_SET_NOTIFY_SUCCESS = "action.set.notify.success";
+    public final static String ACTION_SET_NOTIFY_FAILED = "action.set.notify.failed";
 
 
     //UUID

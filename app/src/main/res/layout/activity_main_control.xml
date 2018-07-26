@@ -3,36 +3,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#3A171B"
+    android:background="@mipmap/pc_index_bg"
     android:orientation="vertical"
     tools:context=".ui.activity.MainControlActivity">
 
 
     <ImageView
-        android:layout_width="100dp"
-        android:layout_height="60dp"
+        android:layout_width="100pt"
+        android:layout_height="60pt"
+        android:layout_marginTop="26pt"
         android:layout_gravity="center_horizontal"
-        android:background="@mipmap/ic_launcher" />
+        android:background="@mipmap/icon_index_top_logo1" />
 
     <ImageView
         android:layout_width="match_parent"
-        android:layout_height="60dp"
+        android:layout_height="60pt"
         android:layout_gravity="center_horizontal"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="30dp"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_marginLeft="30pt"
+        android:layout_marginRight="30pt"
+        android:layout_marginTop="30pt"
+        android:background="@mipmap/icon_index_top_text" />
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_height="150pt"
+        android:layout_marginLeft="30pt"
+        android:layout_marginRight="30pt"
+        android:layout_marginTop="15pt"
         android:orientation="horizontal">
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
@@ -41,9 +42,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_one_add"
-                android:layout_marginTop="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginTop="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_add" />
 
@@ -58,9 +59,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_one_reduce"
-                android:layout_marginBottom="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginBottom="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_less" />
@@ -69,14 +70,14 @@
 
         <com.example.lloyd.multifunctionbed.ui.widget.PressValueBar
             android:id="@+id/pvb_one"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
         </com.example.lloyd.multifunctionbed.ui.widget.PressValueBar>
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
@@ -85,9 +86,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_two_add"
-                android:layout_marginTop="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginTop="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_add" />
 
@@ -102,9 +103,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_two_reduce"
-                android:layout_marginBottom="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginBottom="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_less" />
@@ -113,14 +114,14 @@
 
         <com.example.lloyd.multifunctionbed.ui.widget.PressValueBar
             android:id="@+id/pvb_two"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
         </com.example.lloyd.multifunctionbed.ui.widget.PressValueBar>
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
@@ -129,9 +130,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_third_add"
-                android:layout_marginTop="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginTop="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_add" />
 
@@ -146,9 +147,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_third_reduce"
-                android:layout_marginBottom="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginBottom="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_less" />
@@ -157,14 +158,14 @@
 
         <com.example.lloyd.multifunctionbed.ui.widget.PressValueBar
             android:id="@+id/pvb_third"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
         </com.example.lloyd.multifunctionbed.ui.widget.PressValueBar>
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
@@ -173,9 +174,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_four_add"
-                android:layout_marginTop="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginTop="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_add" />
 
@@ -191,9 +192,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_four_reduce"
-                android:layout_marginBottom="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginBottom="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_less" />
@@ -202,14 +203,14 @@
 
         <com.example.lloyd.multifunctionbed.ui.widget.PressValueBar
             android:id="@+id/pvb_four"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
         </com.example.lloyd.multifunctionbed.ui.widget.PressValueBar>
 
         <RelativeLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
@@ -218,9 +219,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_five_add"
-                android:layout_marginTop="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginTop="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_alignParentTop="true"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center_horizontal"
@@ -238,9 +239,9 @@
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_bar_five_reduce"
-                android:layout_marginBottom="5dp"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
+                android:layout_marginBottom="5pt"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
                 android:src="@mipmap/icon_less" />
@@ -249,7 +250,7 @@
 
         <com.example.lloyd.multifunctionbed.ui.widget.PressValueBar
             android:id="@+id/pvb_five"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="match_parent"
             android:layout_weight="1">
 
@@ -259,35 +260,37 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="30pt"
+        android:layout_marginRight="30pt"
+        android:layout_marginTop="15pt"
         android:orientation="horizontal">
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#F6E39E"
             android:orientation="horizontal"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp">
+            android:paddingBottom="3pt"
+            android:paddingTop="3pt">
 
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_tem_left_add"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="5dp"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
+                android:layout_marginLeft="5pt"
+                android:layout_gravity="center_vertical"
                 android:background="@mipmap/icon_add_color" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="左床"
+                android:textSize="10pt"
                 android:textColor="#1C1011" />
 
             <TextView
@@ -297,53 +300,57 @@
                 android:layout_gravity="center"
                 android:background="@drawable/shape_tem_bg"
                 android:gravity="center"
-                android:padding="2dp"
-                android:text="45℃"
+                android:padding="2pt"
+                android:text="0℃"
                 android:textColor="#F6E39E" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="加热"
+                android:textSize="10pt"
                 android:textColor="#1C1011" />
 
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_tem_left_reduce"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="5pt"
                 android:background="@mipmap/icon_less_color" />
         </LinearLayout>
 
         <LinearLayout
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="3pt"
             android:layout_weight="1"
             android:background="#F6E39E"
             android:orientation="horizontal"
-            android:paddingBottom="3dp"
-            android:paddingTop="3dp">
+            android:paddingBottom="3pt"
+            android:paddingTop="3pt">
 
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_tem_right_add"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginLeft="5dp"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
+                android:layout_marginLeft="5pt"
+                android:layout_gravity="center_vertical"
                 android:background="@mipmap/icon_add_color" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="右床"
+                android:textSize="10pt"
                 android:textColor="#1C1011" />
 
             <TextView
@@ -353,25 +360,27 @@
                 android:layout_gravity="center"
                 android:background="@drawable/shape_tem_bg"
                 android:gravity="center"
-                android:padding="2dp"
-                android:text="45℃"
+                android:padding="2pt"
+                android:text="0℃"
                 android:textColor="#F6E39E" />
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="0pt"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:layout_weight="1"
                 android:gravity="center"
+                android:textSize="10pt"
                 android:text="加热"
                 android:textColor="#1C1011" />
 
             <ImageView
                 android:clickable="true"
                 android:id="@+id/iv_tem_right_reduce"
-                android:layout_width="24dp"
-                android:layout_height="24dp"
-                android:layout_marginRight="5dp"
+                android:layout_width="24pt"
+                android:layout_height="24pt"
+                android:layout_marginRight="5pt"
+                android:layout_gravity="center_vertical"
                 android:background="@mipmap/icon_less_color" />
         </LinearLayout>
 
@@ -380,33 +389,33 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginLeft="30pt"
+        android:layout_marginRight="30pt"
+        android:layout_marginTop="20pt"
         android:orientation="horizontal">
 
         <LinearLayout
             android:clickable="true"
             android:id="@+id/ll_auto"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:background="#F6E39E"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="70pt"
+                android:layout_height="70pt"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_marginTop="10pt"
+                android:background="@mipmap/icon_auto" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10pt"
+                android:layout_marginTop="10pt"
                 android:gravity="center"
                 android:text="自动"
                 android:textColor="#1C1011" />
@@ -415,26 +424,26 @@
         <LinearLayout
             android:clickable="true"
             android:id="@+id/ll_stop"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="10pt"
             android:layout_weight="1"
             android:background="#F6E39E"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="70pt"
+                android:layout_height="70pt"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_marginTop="10pt"
+                android:background="@mipmap/icon_stop" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10pt"
+                android:layout_marginTop="10pt"
                 android:gravity="center"
                 android:text="停止"
                 android:textColor="#1C1011" />
@@ -443,26 +452,26 @@
         <LinearLayout
             android:clickable="true"
             android:id="@+id/ll_setting"
-            android:layout_width="0dp"
+            android:layout_width="0pt"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:layout_marginLeft="10pt"
             android:layout_weight="1"
             android:background="#F6E39E"
             android:orientation="vertical">
 
             <ImageView
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="70pt"
+                android:layout_height="70pt"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10dp"
-                android:background="@mipmap/ic_launcher" />
+                android:layout_marginTop="10pt"
+                android:background="@mipmap/icon_setting" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10pt"
+                android:layout_marginTop="10pt"
                 android:gravity="center"
                 android:text="设置"
                 android:textColor="#1C1011" />
@@ -472,21 +481,22 @@
 
     <ImageView
         android:layout_width="wrap_content"
-        android:layout_height="60dp"
+        android:layout_height="50pt"
+        android:layout_marginLeft="25pt"
+        android:layout_marginRight="25pt"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="10dp"
-        android:background="@mipmap/ic_launcher" />
+        android:layout_marginTop="10pt"
+        android:background="@mipmap/icon_botton_pc" />
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
+        android:layout_height="0pt"
         android:layout_weight="1" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginBottom="60pt"
         android:orientation="vertical">
 
         <TextView
@@ -496,7 +506,7 @@
             android:gravity="center"
             android:text="温州瑞莱克斯保健器材有限公司"
             android:textColor="#F6E39E"
-            android:textSize="18sp" />
+            android:textSize="15pt" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -505,7 +515,7 @@
             android:gravity="center"
             android:text="WENZHOU RELUEX HEALTH CARE EQUIPMENT CO.,LTD."
             android:textColor="#F6E39E"
-            android:textSize="12sp" />
+            android:textSize="10pt" />
     </LinearLayout>
 
 </LinearLayout>

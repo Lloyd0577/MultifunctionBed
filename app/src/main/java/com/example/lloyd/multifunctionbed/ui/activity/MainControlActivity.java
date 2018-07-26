@@ -93,6 +93,7 @@ public class MainControlActivity extends AppCompatActivity {
     public static String CMD_STOP = "FA4100A5";
     private String receiveText;
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -101,7 +102,44 @@ public class MainControlActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
         registerReceiver();
         connectDevice = (EntityDevice) getIntent().getSerializableExtra("connectDevice");
-        pvb_one.setValue(4);
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initPressViewValue();
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
+    private void initPressViewValue() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                synchronized (this){
+                    try {
+                        wait(100);
+                        BluetoothController.getInstance(MainControlActivity.this)
+                                .write(ConvertUtils.hexStringToByteArray("FA3100A5"));
+                        wait(100);
+                        BluetoothController.getInstance(MainControlActivity.this)
+                                .write(ConvertUtils.hexStringToByteArray("FA3200A5"));
+                        wait(100);
+                        BluetoothController.getInstance(MainControlActivity.this)
+                                .write(ConvertUtils.hexStringToByteArray("FA3300A5"));
+                        wait(100);
+                        BluetoothController.getInstance(MainControlActivity.this)
+                                .write(ConvertUtils.hexStringToByteArray("FA3400A5"));
+                        wait(100);
+                        BluetoothController.getInstance(MainControlActivity.this)
+                                .write(ConvertUtils.hexStringToByteArray("FA3500A5"));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } finally {
+                    }
+                }
+            }
+        }).start();
     }
 
     private void registerReceiver() {
@@ -113,6 +151,8 @@ public class MainControlActivity extends AppCompatActivity {
         intentFilter.addAction(Constant.ACTION_STOP_CONNECT);
         intentFilter.addAction(Constant.ACTION_STOP_SCAN);
         intentFilter.addAction(Constant.ACTION_NEED_SCAN);
+        intentFilter.addAction(Constant.ACTION_SET_NOTIFY_SUCCESS);
+        intentFilter.addAction(Constant.ACTION_SET_NOTIFY_FAILED);
         registerReceiver(receiver, intentFilter);
     }
 
@@ -128,17 +168,46 @@ public class MainControlActivity extends AppCompatActivity {
                     Constant.ACTION_UPDATE_DEVICE_LIST)) {
 
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_CONNECTED_ONE_DEVICE)) {
-
+                initPressViewValue();
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_STOP_CONNECT)) {
                 BluetoothController.getInstance(MainControlActivity.this).connect(connectDevice);
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_RECEIVE_MESSAGE_FROM_DEVICE)) {
                 receiveText = intent.getStringExtra("message");
-                Toast.makeText(MainControlActivity.this, receiveText, Toast.LENGTH_SHORT).show();
+                handleReceiveMessage(receiveText);
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_STOP_SCAN)) {
 
             } else if (intent.getAction().equalsIgnoreCase(Constant.ACTION_NEED_SCAN)) {
 
             }
+        }
+    }
+
+    public void handleReceiveMessage(String string){
+        if (string ==null || string.length() < 8){
+            return;
+        }
+        int pressValue = Integer.parseInt(string.substring(5,6));
+        switch (string.substring(2,4)){
+            case "31":
+                barOneValue = pressValue;
+                pvb_one.setValue(pressValue);
+                break;
+            case "32":
+                barTwoValue = pressValue;
+                pvb_two.setValue(pressValue);
+                break;
+            case "33":
+                barThirdValue = pressValue;
+                pvb_third.setValue(pressValue);
+                break;
+            case "34":
+                barFourValue = pressValue;
+                pvb_four.setValue(pressValue);
+                break;
+            case "35":
+                barFiveValue = pressValue;
+                pvb_five.setValue(pressValue);
+                break;
         }
     }
 
@@ -317,19 +386,23 @@ public class MainControlActivity extends AppCompatActivity {
                 }
                 break;
             case R.id.ll_auto:
+                Toast.makeText(MainControlActivity.this,"已下发命令",Toast.LENGTH_SHORT).show();
                 BluetoothController.getInstance(MainControlActivity.this)
                         .write(ConvertUtils.hexStringToByteArray(CMD_AUTO));
                 break;
             case R.id.ll_stop:
+                Toast.makeText(MainControlActivity.this,"已下发命令",Toast.LENGTH_SHORT).show();
                 BluetoothController.getInstance(MainControlActivity.this)
                         .write(ConvertUtils.hexStringToByteArray(CMD_STOP));
                 break;
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onDestroy() {
         unregisterReceiver(receiver);
+        BluetoothController.getInstance(MainControlActivity.this).disconnect();
         super.onDestroy();
     }
 }
