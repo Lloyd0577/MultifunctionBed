@@ -393,89 +393,69 @@
         android:layout_marginRight="30pt"
         android:layout_marginTop="20pt"
         android:orientation="horizontal">
-
-        <LinearLayout
-            android:clickable="true"
-            android:id="@+id/ll_auto"
+        <RelativeLayout
             android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:background="#F6E39E"
-            android:orientation="vertical">
-
-            <ImageView
-                android:layout_width="70pt"
-                android:layout_height="70pt"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10pt"
-                android:background="@mipmap/icon_auto" />
-
-            <TextView
+            android:layout_weight="1"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:clickable="true"
+                android:id="@+id/ll_auto"
+                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10pt"
-                android:layout_marginTop="10pt"
-                android:gravity="center"
-                android:text="自动"
-                android:textColor="#1C1011" />
-        </LinearLayout>
+                android:background="#F6E39E"
+                android:orientation="horizontal">
 
-        <LinearLayout
-            android:clickable="true"
-            android:id="@+id/ll_stop"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10pt"
-            android:layout_weight="1"
-            android:background="#F6E39E"
-            android:orientation="vertical">
+                <ImageView
+                    android:layout_width="70pt"
+                    android:layout_height="70pt"
+                    android:layout_gravity="center_vertical"
+                    android:background="@mipmap/icon_auto" />
 
-            <ImageView
-                android:layout_width="70pt"
-                android:layout_height="70pt"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10pt"
-                android:background="@mipmap/icon_stop" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10pt"
+                    android:gravity="center"
+                    android:text="自动"
+                    android:textColor="#1C1011" />
+            </LinearLayout>
+        </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10pt"
-                android:layout_marginTop="10pt"
-                android:gravity="center"
-                android:text="停止"
-                android:textColor="#1C1011" />
-        </LinearLayout>
+     <RelativeLayout
+         android:layout_marginLeft="10pt"
+         android:layout_width="0pt"
+         android:layout_weight="1"
+         android:background="#F6E39E"
+         android:layout_height="wrap_content">
+         <LinearLayout
+             android:clickable="true"
+             android:id="@+id/ll_stop"
+             android:layout_centerInParent="true"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:background="#F6E39E"
+             android:orientation="horizontal">
 
-        <LinearLayout
-            android:clickable="true"
-            android:id="@+id/ll_setting"
-            android:layout_width="0pt"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10pt"
-            android:layout_weight="1"
-            android:background="#F6E39E"
-            android:orientation="vertical">
+             <ImageView
+                 android:layout_width="70pt"
+                 android:layout_height="70pt"
+                 android:layout_gravity="center_vertical"
+                 android:background="@mipmap/icon_stop" />
 
-            <ImageView
-                android:layout_width="70pt"
-                android:layout_height="70pt"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginTop="10pt"
-                android:background="@mipmap/icon_setting" />
+             <TextView
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_gravity="center_vertical"
+                 android:layout_marginLeft="10pt"
+                 android:text="停止"
+                 android:textColor="#1C1011" />
+         </LinearLayout>
+     </RelativeLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10pt"
-                android:layout_marginTop="10pt"
-                android:gravity="center"
-                android:text="设置"
-                android:textColor="#1C1011" />
-        </LinearLayout>
+
 
     </LinearLayout>
 
