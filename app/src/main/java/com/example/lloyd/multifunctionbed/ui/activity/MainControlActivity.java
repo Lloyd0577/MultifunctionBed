@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Build;
+import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -92,6 +93,8 @@ public class MainControlActivity extends AppCompatActivity {
     public static String CMD_AUTO = "FA4200A5";
     public static String CMD_STOP = "FA4100A5";
     private String receiveText;
+    private boolean isSendingPress;
+    private Handler mainHanlder;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
@@ -102,13 +105,14 @@ public class MainControlActivity extends AppCompatActivity {
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);//隐藏状态栏
         registerReceiver();
         connectDevice = (EntityDevice) getIntent().getSerializableExtra("connectDevice");
+        initPressViewValue();
+        mainHanlder = new Handler();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     @Override
     protected void onResume() {
         super.onResume();
-        initPressViewValue();
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
@@ -116,7 +120,7 @@ public class MainControlActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                synchronized (this){
+                synchronized (this) {
                     try {
                         wait(100);
                         BluetoothController.getInstance(MainControlActivity.this)
@@ -182,120 +186,206 @@ public class MainControlActivity extends AppCompatActivity {
         }
     }
 
-    public void handleReceiveMessage(String string){
-        if (string ==null || string.length() < 8){
+    public void handleReceiveMessage(String string) {
+        if (string == null || string.length() < 8) {
             return;
         }
-        int pressValue = Integer.parseInt(string.substring(5,6));
-        switch (string.substring(2,4)){
+        int pressValue = Integer.parseInt(string.substring(5, 6));
+        switch (string.substring(2, 4)) {
             case "31":
+            case "21":
+                setIsSendingPress(false);
+                mainHanlder.removeCallbacks(runnable);
                 barOneValue = pressValue;
                 pvb_one.setValue(pressValue);
                 break;
             case "32":
+            case "22":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
                 barTwoValue = pressValue;
                 pvb_two.setValue(pressValue);
                 break;
             case "33":
+            case "23":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
                 barThirdValue = pressValue;
                 pvb_third.setValue(pressValue);
                 break;
             case "34":
+            case "24":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
                 barFourValue = pressValue;
                 pvb_four.setValue(pressValue);
                 break;
             case "35":
+            case "25":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
                 barFiveValue = pressValue;
                 pvb_five.setValue(pressValue);
                 break;
+            case "26":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
+                leftTemValue = pressValue;
+                tv_tem_left.setText(leftTemValue + "℃");
+                break;
+            case "27":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
+                rightTemValue = pressValue;
+                tv_tem_right.setText(rightTemValue + "℃");
+                break;
+            case "41":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
+                Toast.makeText(MainControlActivity.this, "停止指令下发成功！", Toast.LENGTH_SHORT).show();
+                break;
+            case "42":
+                mainHanlder.removeCallbacks(runnable);
+                setIsSendingPress(false);
+                Toast.makeText(MainControlActivity.this, "自动指令下发成功！", Toast.LENGTH_SHORT).show();
+                break;
+
         }
     }
 
+    public void setIsSendingPress(boolean flag) {
+        this.isSendingPress = flag;
+    }
+
+    public void handlePressSendFailed() {
+        mainHanlder.postDelayed(runnable, 500);
+    }
+
+    private Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            if (isSendingPress) {
+                Toast.makeText(MainControlActivity.this, "发送指令失败!", Toast.LENGTH_SHORT).show();
+                isSendingPress = false;
+            }
+        }
+    };
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void handleBarAdd(PressValueBar pressValueBar, int index) {
-        int oldValue = pressValueBar.getValue();
-        if (oldValue == 9) {
-            Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
+        if (isSendingPress) {
             return;
-        } else {
-            switch (index) {
-                case 1:
-                    Log.d("###", "bar one add");
-                    barOneValue = oldValue + 1;
-                    pvb_one.setValue(barOneValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barOneValue + "A5"));
-                    break;
-                case 2:
-                    barTwoValue = oldValue + 1;
-                    pvb_two.setValue(barTwoValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barTwoValue + "A5"));
-                    break;
-                case 3:
-                    barThirdValue = oldValue + 1;
-                    pvb_third.setValue(barThirdValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barThirdValue + "A5"));
-                    break;
-                case 4:
-                    barFourValue = oldValue + 1;
-                    pvb_four.setValue(barFourValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barFourValue + "A5"));
-                    break;
-                case 5:
-                    barFiveValue = oldValue + 1;
-                    pvb_five.setValue(barFiveValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barFiveValue + "A5"));
-                    break;
-            }
-
+        }
+        switch (index) {
+            case 1:
+                if (barOneValue == 9) {
+                    Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barOneValue + 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 2:
+                if (barTwoValue == 9) {
+                    Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barTwoValue + 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 3:
+                if (barThirdValue == 9) {
+                    Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barThirdValue + 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 4:
+                if (barFourValue == 9) {
+                    Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barFourValue + 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 5:
+                if (barFiveValue == 9) {
+                    Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barFiveValue + 1) + "A5"));
+                handlePressSendFailed();
+                break;
         }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void handleBarReduce(PressValueBar pressValueBar, int index) {
-        int oldValue = pressValueBar.getValue();
-        if (oldValue == 0) {
-            Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
+        if (isSendingPress) {
             return;
-        } else {
-            switch (index) {
-                case 1:
-                    Log.d("###", "bar one add");
-                    barOneValue = oldValue - 1;
-                    pvb_one.setValue(barOneValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barOneValue + "A5"));
-                    break;
-                case 2:
-                    barTwoValue = oldValue - 1;
-                    pvb_two.setValue(barTwoValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barTwoValue + "A5"));
-                    break;
-                case 3:
-                    barThirdValue = oldValue - 1;
-                    pvb_third.setValue(barThirdValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barThirdValue + "A5"));
-                    break;
-                case 4:
-                    barFourValue = oldValue - 1;
-                    pvb_four.setValue(barFourValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barFourValue + "A5"));
-                    break;
-                case 5:
-                    barFiveValue = oldValue - 1;
-                    pvb_five.setValue(barFiveValue);
-                    BluetoothController.getInstance(MainControlActivity.this)
-                            .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + barFiveValue + "A5"));
-                    break;
-            }
-
+        }
+        switch (index) {
+            case 1:
+                if (barOneValue == 0) {
+                    Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barOneValue - 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 2:
+                if (barTwoValue == 0) {
+                    Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barTwoValue - 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 3:
+                if (barThirdValue == 0) {
+                    Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barThirdValue - 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 4:
+                if (barFourValue == 0) {
+                    Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barFourValue - 1) + "A5"));
+                handlePressSendFailed();
+                break;
+            case 5:
+                if (barFiveValue == 0) {
+                    Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+                setIsSendingPress(true);
+                BluetoothController.getInstance(MainControlActivity.this)
+                        .write(ConvertUtils.hexStringToByteArray("FA2" + index + "0" + (barFiveValue - 1) + "A5"));
+                handlePressSendFailed();
+                break;
         }
     }
 
@@ -345,11 +435,11 @@ public class MainControlActivity extends AppCompatActivity {
                 if (leftTemValue >= 255) {
                     Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
                 } else {
-                    leftTemValue++;
-                    tv_tem_left.setText(leftTemValue + "℃");
                     BluetoothController.getInstance(MainControlActivity.this)
                             .write(ConvertUtils.hexStringToByteArray("FA26"
-                                    + ConvertUtils.addZeroInHead(Integer.toHexString(leftTemValue)) + "A5"));
+                                    + ConvertUtils.addZeroInHead(Integer.toHexString(leftTemValue + 1)) + "A5"));
+                    setIsSendingPress(true);
+                    handlePressSendFailed();
                 }
                 break;
             case R.id.iv_tem_left_reduce:
@@ -357,10 +447,11 @@ public class MainControlActivity extends AppCompatActivity {
                     Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
                 } else {
                     leftTemValue--;
-                    tv_tem_left.setText(leftTemValue + "℃");
                     BluetoothController.getInstance(MainControlActivity.this)
                             .write(ConvertUtils.hexStringToByteArray("FA26"
-                                    + ConvertUtils.addZeroInHead(Integer.toHexString(leftTemValue)) + "A5"));
+                                    + ConvertUtils.addZeroInHead(Integer.toHexString(leftTemValue - 1)) + "A5"));
+                    setIsSendingPress(true);
+                    handlePressSendFailed();
                 }
                 break;
             case R.id.iv_tem_right_add:
@@ -368,10 +459,11 @@ public class MainControlActivity extends AppCompatActivity {
                     Toast.makeText(this, "已达到最大值!", Toast.LENGTH_SHORT).show();
                 } else {
                     rightTemValue++;
-                    tv_tem_right.setText(rightTemValue + "℃");
                     BluetoothController.getInstance(MainControlActivity.this)
                             .write(ConvertUtils.hexStringToByteArray("FA27"
-                                    + ConvertUtils.addZeroInHead(Integer.toHexString(rightTemValue)) + "A5"));
+                                    + ConvertUtils.addZeroInHead(Integer.toHexString(rightTemValue + 1)) + "A5"));
+                    setIsSendingPress(true);
+                    handlePressSendFailed();
                 }
                 break;
             case R.id.iv_tem_right_reduce:
@@ -379,21 +471,24 @@ public class MainControlActivity extends AppCompatActivity {
                     Toast.makeText(this, "已达到最小值!", Toast.LENGTH_SHORT).show();
                 } else {
                     rightTemValue--;
-                    tv_tem_right.setText(rightTemValue + "℃");
                     BluetoothController.getInstance(MainControlActivity.this)
                             .write(ConvertUtils.hexStringToByteArray("FA27" +
-                                    ConvertUtils.addZeroInHead(Integer.toHexString(rightTemValue)) + "A5"));
+                                    ConvertUtils.addZeroInHead(Integer.toHexString(rightTemValue - 1)) + "A5"));
+                    setIsSendingPress(true);
+                    handlePressSendFailed();
                 }
                 break;
             case R.id.ll_auto:
-                Toast.makeText(MainControlActivity.this,"已下发命令",Toast.LENGTH_SHORT).show();
                 BluetoothController.getInstance(MainControlActivity.this)
                         .write(ConvertUtils.hexStringToByteArray(CMD_AUTO));
+                setIsSendingPress(true);
+                handlePressSendFailed();
                 break;
             case R.id.ll_stop:
-                Toast.makeText(MainControlActivity.this,"已下发命令",Toast.LENGTH_SHORT).show();
                 BluetoothController.getInstance(MainControlActivity.this)
                         .write(ConvertUtils.hexStringToByteArray(CMD_STOP));
+                setIsSendingPress(true);
+                handlePressSendFailed();
                 break;
         }
     }

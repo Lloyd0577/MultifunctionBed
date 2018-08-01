@@ -103,7 +103,7 @@ public class DeviceListActivity extends BaseActivity {
         if (!locationManager
                 .isProviderEnabled(LocationManager.GPS_PROVIDER)) {
             AlertDialog.Builder dialog = new AlertDialog.Builder(this);
-            dialog.setMessage("请打开GPS，有助于提高开锁效率");
+            dialog.setMessage("请打开GPS，有助于提高蓝牙通信效率");
             dialog.setPositiveButton("确定",
                     new DialogInterface.OnClickListener() {
 
