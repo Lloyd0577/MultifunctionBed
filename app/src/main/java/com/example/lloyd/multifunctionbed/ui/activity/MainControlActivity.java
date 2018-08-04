@@ -190,7 +190,13 @@ public class MainControlActivity extends AppCompatActivity {
         if (string == null || string.length() < 8) {
             return;
         }
-        int pressValue = Integer.parseInt(string.substring(5, 6));
+        int pressValue = 0;
+        try {
+            pressValue = Integer.parseInt(string.substring(5, 6));
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+            Toast.makeText(MainControlActivity.this, "数据解析输错：" + string, Toast.LENGTH_SHORT).show();
+        }
         switch (string.substring(2, 4)) {
             case "31":
             case "21":
