@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/pc_index_bg"
+    android:background="@mipmap/bg_blue1"
     android:orientation="vertical"
     tools:context=".ui.activity.MainControlActivity">
 
@@ -13,16 +13,36 @@
         android:layout_height="60pt"
         android:layout_marginTop="26pt"
         android:layout_gravity="center_horizontal"
-        android:background="@mipmap/icon_index_top_logo1" />
+        android:background="@mipmap/icon_logo_top" />
 
+    <TextView
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_title"
+        android:textColor="#F6E39E"
+        android:textSize="34sp"
+        android:text="创造生活艺术之美"/>
+    <TextView
+        android:visibility="gone"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10pt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tv_title_en"
+        android:textColor="#F6E39E"
+        android:textSize="20sp"
+        android:text="All Life Vogue"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="60pt"
+        android:visibility="visible"
         android:layout_gravity="center_horizontal"
         android:layout_marginLeft="30pt"
         android:layout_marginRight="30pt"
         android:layout_marginTop="30pt"
-        android:background="@mipmap/icon_index_top_text" />
+        android:background="@mipmap/icon_top_title" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -412,17 +432,15 @@
                     android:layout_height="90pt"
                     android:layout_gravity="center_vertical"
                     android:background="@mipmap/icon_auto" />
-
-
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10pt"
+
                     android:gravity="center"
                     android:textSize="22pt"
                     android:textStyle="bold"
-                    android:text="自\n动"
+                    android:text="自动"
                     android:textColor="#1C1011" />
             </LinearLayout>
         </RelativeLayout>
@@ -452,14 +470,12 @@
                  android:layout_width="wrap_content"
                  android:layout_height="wrap_content"
                  android:layout_gravity="center_vertical"
-                 android:layout_marginLeft="10pt"
-                 android:text="停\n止"
+                 android:text="停止"
                  android:textSize="22pt"
                  android:textStyle="bold"
                  android:textColor="#1C1011" />
          </LinearLayout>
      </RelativeLayout>
-
 
 
     </LinearLayout>
@@ -471,7 +487,7 @@
         android:layout_marginRight="25pt"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="10pt"
-        android:background="@mipmap/icon_botton_pc" />
+        android:background="@mipmap/icon_botton_pc1" />
 
     <TextView
         android:layout_width="match_parent"
@@ -489,7 +505,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="温州瑞莱克斯保健器材有限公司"
+            android:text="优太生活科技有限公司"
             android:textColor="#F6E39E"
             android:textSize="15pt" />
 
@@ -498,7 +514,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:gravity="center"
-            android:text="WENZHOU RELUEX HEALTH CARE EQUIPMENT CO.,LTD."
+            android:text="UTAL LIFT TECHNOLOGY CO.,LTD."
             android:textColor="#F6E39E"
             android:textSize="10pt" />
     </LinearLayout>

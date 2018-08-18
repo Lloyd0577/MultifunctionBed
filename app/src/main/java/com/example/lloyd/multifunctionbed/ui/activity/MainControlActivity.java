@@ -4,6 +4,8 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.res.AssetManager;
+import android.graphics.Typeface;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
@@ -80,6 +82,10 @@ public class MainControlActivity extends AppCompatActivity {
     LinearLayout ll_auto;
     @BindView(R.id.ll_stop)
     LinearLayout ll_stop;
+    @BindView(R.id.tv_title)
+    TextView tvTitle;
+    @BindView(R.id.tv_title_en)
+    TextView tvTitleEn;
     private int barOneValue;
     private int barTwoValue;
     private int barThirdValue;
@@ -186,6 +192,7 @@ public class MainControlActivity extends AppCompatActivity {
         }
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR2)
     public void handleReceiveMessage(String string) {
         if (string == null || string.length() < 8) {
             return;
@@ -249,14 +256,29 @@ public class MainControlActivity extends AppCompatActivity {
                 mainHanlder.removeCallbacks(runnable);
                 setIsSendingPress(false);
                 Toast.makeText(MainControlActivity.this, "停止指令下发成功！", Toast.LENGTH_SHORT).show();
+                initPressViewValue();
                 break;
             case "42":
                 mainHanlder.removeCallbacks(runnable);
                 setIsSendingPress(false);
                 Toast.makeText(MainControlActivity.this, "自动指令下发成功！", Toast.LENGTH_SHORT).show();
+                setAutoCmdSuccessView();
                 break;
 
         }
+    }
+
+    public void setAutoCmdSuccessView(){
+        barOneValue = 6;
+        barTwoValue = 6;
+        barThirdValue = 6;
+        barFourValue = 6;
+        barFiveValue = 6;
+        pvb_one.setValue(6);
+        pvb_two.setValue(6);
+        pvb_third.setValue(6);
+        pvb_four.setValue(6);
+        pvb_five.setValue(6);
     }
 
     public void setIsSendingPress(boolean flag) {
